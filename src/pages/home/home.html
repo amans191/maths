@@ -1,14 +1,44 @@
 <ion-header>
+
   <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+    <ion-title>Create A Quiz!</ion-title>
   </ion-navbar>
+
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+
+<ion-content padding id="page">
+
+  <table style="border: 0px">
+    <tr>
+      <td style="width: 75%">Enter a minimum number:</td>
+      <td><ion-input type="number" id="MinNum" [(ngModel)]="MinNum"></ion-input></td>
+    </tr>
+    <tr>
+      <td style="width: 75%">Enter a maximum number:</td>
+      <td><ion-input type="number" id="MaxNum" [(ngModel)]="MaxNum"></ion-input></td>
+    </tr>
+    <tr>
+      <ion-item>
+        <ion-label>Select an operator: </ion-label>
+        <ion-select id="operator">
+          <ion-option value="add">Addition</ion-option>
+          <ion-option value="sub">Subtraction</ion-option>
+          <ion-option value="mult">Multiplication</ion-option>
+          <ion-option value="div">Division</ion-option>
+        </ion-select>
+      </ion-item>
+    </tr>
+  </table>
+
+  <br>
+  <button ion-button (click)="createQuiz()">Generate Quiz!</button>
+  <br>
+
+  <div *ngIf="generate">
+    <h4>Quiz Created</h4>
+    <div *ngFor="let q of this.questions">
+      <label>Q {{q.id}}</label>:  {{q.num1}} {{q.operator}} {{q.num2}} = {{q.answer}}
+    </div>
+  </div>
 </ion-content>
